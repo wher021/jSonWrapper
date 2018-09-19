@@ -17,11 +17,12 @@ namespace JsonParser
         {
             // Create an object
             var user = new User { FirstName = "Sean" };
+
+            var parser = new JsonSerializer();
             // Serialize the object to JSON
-            var jsonUser = JsonSerializer.ToJsonString(user, useCamelCase: true, ignoreNulls: true, indentJson: false);
+            var jsonUser = parser.ToJsonString(user, useCamelCase: true, ignoreNulls: true, indentJson: false);
 
             // Deserialize the object
-            var parser = new JsonSerializer();
             var deserializedUser = parser.DeserializeObject33<User>(jsonUser);
             var shit = ((User)deserializedUser).FirstName;
                 //JsonSerializer.FromJsonString(jsonUser);
@@ -47,7 +48,7 @@ public class JsonSerializer : JsonParser.Interface2
     ///if set to true [ignore nulls].
     ///if set to true [indent json].
     /// 
-    public static string ToJsonString(object objectToSerialize, bool useCamelCase = true, bool ignoreNulls = true,
+    public  string ToJsonString<T>(T objectToSerialize, bool useCamelCase = true, bool ignoreNulls = true,
         bool indentJson = false)
     {
         var settings = new JsonSerializerSettings();
